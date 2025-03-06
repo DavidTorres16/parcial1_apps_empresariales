@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.CommentDTO;
+import com.example.demo.dto.CommentUpdateDTO;
 import com.example.demo.models.Comment;
 import com.example.demo.models.Post;
 import com.example.demo.repositories.CommentRepository;
@@ -37,6 +38,29 @@ public class CommentService {
                 .content(commentDTO.getContent())
                 .createdAt(LocalDateTime.now())
                 .post(post)
+                .build();
+        return commentRepository.save(comment);
+    }
+
+    /**
+     * Save function override to update Comment
+     * @Params CommentUpdateDTO comment data to update
+     * @Return updated comment
+     */
+    @Transactional
+    public Comment save(CommentUpdateDTO commentDTO) {
+        if(!commentRepository.existsById(commentDTO.getId())){
+            throw new RuntimeException("Comment not found");
+        }
+
+        Comment oldComment = commentRepository.findById(commentDTO.getId())
+                .orElseThrow(() -> new RuntimeException("Comment not found"));
+
+        Comment comment = Comment.builder()
+                .id(commentDTO.getId())
+                .content(commentDTO.getContent())
+                .createdAt(LocalDateTime.now())
+                .post(oldComment.getPost())
                 .build();
         return commentRepository.save(comment);
     }

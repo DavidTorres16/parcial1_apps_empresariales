@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.UserDTO;
+import com.example.demo.dto.UserUpdateDTO;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,14 @@ public class UserController {
      */
     @PostMapping
     public User createUser(@RequestBody UserDTO user) { return userService.save(user); }
+
+    /**
+     * Update an existent user.
+     * @param user User object.
+     * @return The updated user.
+     */
+    @PutMapping
+    public User updateUser(@RequestBody UserUpdateDTO user) { return userService.save(user); }
 
     /**
      * Delete a user by ID.

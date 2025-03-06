@@ -3,6 +3,10 @@ package com.example.demo.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+
+/**
+ * Category entity mapped by JPA
+ */
 @Entity
 @Table(name = "categories")
 @Data

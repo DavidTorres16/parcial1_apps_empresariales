@@ -6,6 +6,10 @@ import lombok.*;
 
 import java.util.List;
 
+
+/**
+ * User entity mapped by JPA
+ */
 @Entity
 @Table(name = "users")
 @Data

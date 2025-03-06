@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.PostDTO;
+import com.example.demo.dto.PostUpdateDTO;
 import com.example.demo.models.*;
 import com.example.demo.repositories.*;
 import jakarta.transaction.Transactional;
@@ -54,6 +55,41 @@ public class PostService {
                 .content(postDTO.getContent())
                 .createdAt(LocalDateTime.now())
                 .author(author)
+                .tags(tags)
+                .categories(categories)
+                .build();
+
+        return postRepository.save(post);
+    }
+
+    /**
+     * Save function override to update Post
+     * @Params PostUpdateDTO post data to update
+     * @Return updated user
+     */
+    @Transactional
+    public Post save(PostUpdateDTO postDTO) {
+
+        if(!postRepository.existsById(postDTO.getId())){
+            throw new RuntimeException("Post not found");
+        }
+
+        Post oldPostInfo = postRepository.findById(postDTO.getId())
+                .orElseThrow(() -> new RuntimeException("Author not found"));
+
+        Set<Tag> tags = postDTO.getTagIds() != null
+                ? tagRepository.findAllById(postDTO.getTagIds()).stream().collect(Collectors.toSet())
+                : Set.of();
+
+        Set<Category> categories = postDTO.getCategoryIds() != null
+                ? categoryRepository.findAllById(postDTO.getCategoryIds()).stream().collect(Collectors.toSet())
+                : Set.of();
+
+        Post post = Post.builder()
+                .title(postDTO.getTitle())
+                .content(postDTO.getContent())
+                .createdAt(LocalDateTime.now())
+                .author(oldPostInfo.getAuthor())
                 .tags(tags)
                 .categories(categories)
                 .build();

@@ -1,10 +1,14 @@
 package com.example.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Comment entity mapped by JPA
+ */
 @Entity
 @Table(name = "comments")
 @Data
@@ -20,6 +24,7 @@ public class Comment {
     private LocalDateTime createdAt;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 }

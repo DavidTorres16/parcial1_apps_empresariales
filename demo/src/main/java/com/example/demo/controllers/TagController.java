@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.TagDTO;
+import com.example.demo.dto.TagUpdateDTO;
 import com.example.demo.models.Tag;
 import com.example.demo.services.TagService;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,15 @@ public class TagController {
      */
     @PostMapping
     public Tag createTag(@RequestBody TagDTO tag) { return tagService.save(tag); }
+
+    /**
+     * Update an existent tag.
+     * @param tag Tag object.
+     * @return The Updated tag.
+     */
+    @PutMapping
+    public Tag createTag(@RequestBody TagUpdateDTO tag) { return tagService.save(tag); }
+
 
     /**
      * Delete a tag by ID.

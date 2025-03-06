@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.CommentDTO;
+import com.example.demo.dto.CommentUpdateDTO;
 import com.example.demo.models.Comment;
 import com.example.demo.services.CommentService;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,11 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentController {
 
-    private CommentService commentService;
+    private final CommentService commentService;
+
+    public CommentController(CommentService commentService){
+        this.commentService = commentService;
+    }
 
     /**
      * Retrieve all comments.
@@ -36,6 +41,15 @@ public class CommentController {
      */
     @PostMapping
     public Comment createComment(@RequestBody CommentDTO comment) { return commentService.save(comment); }
+
+    /**
+     * Update an existent comment.
+     * @param comment Comment object.
+     * @return The updated comment.
+     */
+    @PutMapping
+    public Comment createComment(@RequestBody CommentUpdateDTO comment) { return commentService.save(comment); }
+
 
     /**
      * Delete a comment by ID.

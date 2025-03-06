@@ -7,6 +7,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+
+/**
+ * Post entity mapped by JPA
+ */
 @Entity
 @Table(name = "posts")
 @Data

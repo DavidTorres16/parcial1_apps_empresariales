@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.dto.TagDTO;
+import com.example.demo.dto.TagUpdateDTO;
 import com.example.demo.models.Tag;
 import com.example.demo.repositories.TagRepository;
 import jakarta.transaction.Transactional;
@@ -26,6 +27,25 @@ public class TagService {
     public Tag save(TagDTO tagDTO) {
         Tag tag = new Tag();
         tag.setName(tagDTO.getName());
+        return tagRepository.save(tag);
+    }
+
+    /**
+     * Save function override to update Tags
+     * @Params TagUpdateDTO tag data to update
+     * @Return updated tag
+     */
+    @Transactional
+    public Tag save(TagUpdateDTO tagDTO) {
+        if(!tagRepository.existsById(tagDTO.getId())){
+            throw new RuntimeException("Tag not found");
+        }
+
+        Tag tag = Tag.builder()
+                .id(tagDTO.getId())
+                .name(tagDTO.getName())
+                .build();
+
         return tagRepository.save(tag);
     }
 

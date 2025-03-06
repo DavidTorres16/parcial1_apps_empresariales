@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.dto.PostDTO;
+import com.example.demo.dto.PostUpdateDTO;
 import com.example.demo.models.Post;
 import com.example.demo.services.PostService;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,14 @@ public class PostController {
      */
     @PostMapping
     public Post createPost(@RequestBody PostDTO post) { return postService.save(post); }
+
+    /**
+     * Update an existent post.
+     * @param post Post object.
+     * @return The updated post.
+     */
+    @PutMapping
+    public Post createPost(@RequestBody PostUpdateDTO post) { return postService.save(post); }
 
     /**
      * Delete a post by ID.

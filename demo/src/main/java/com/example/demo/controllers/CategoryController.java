@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.dto.CategoryDTO;
+import com.example.demo.dto.CategoryUpdateDTO;
 import com.example.demo.models.Category;
 import com.example.demo.services.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,15 @@ public class CategoryController {
      */
     @PostMapping
     public Category createCategory(@RequestBody CategoryDTO category) { return categoryService.save(category); }
+
+    /**
+     * Update an existent category.
+     * @param category Category object.
+     * @return The updated category.
+     */
+    @PutMapping
+    public Category updateCategory(@RequestBody CategoryUpdateDTO category) { return categoryService.save(category); }
+
 
     /**
      * Delete a category by ID.
