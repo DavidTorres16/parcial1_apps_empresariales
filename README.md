@@ -1,4 +1,4 @@
-# Project Name: Demo Application
+# Project Name: Parcial 1 Demo Application
 
 ## Description
 This project is a Java 17 Spring Boot application that implements a REST API using a layered architecture. It includes MySQL as the database and Adminer as a database management tool, all orchestrated using Docker Compose.
